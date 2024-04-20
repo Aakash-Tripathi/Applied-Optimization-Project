@@ -148,13 +148,13 @@ def main():
         ]
     )
 
-    trainset = datasets.MNIST(
+    trainset = datasets.CIFAR10(
         root="./data",
         download=True,
         train=True,
         transform=transform,
     )
-    testset = datasets.MNIST(
+    testset = datasets.CIFAR10(
         root="./data",
         download=True,
         train=False,
@@ -172,7 +172,7 @@ def main():
         shuffle=False,
     )
 
-    model = SimpleMLP(input_size=784, hidden_size=128, output_size=10).to(device)
+    model = SimpleMLP(input_size=3072, hidden_size=128, output_size=10).to(device)
     optimizer = SimulatedAnnealing(model.parameters())
 
     train_losses = []
@@ -214,7 +214,7 @@ def main():
     plt.legend()
 
     # Show plot
-    plt.savefig("./results/sa-results.png")
+    plt.savefig("./results/sa-results-cifar.png")
 
 
 if __name__ == "__main__":
