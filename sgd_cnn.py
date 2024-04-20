@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torchvision import datasets, transforms
 
-from model import SimpleMLP
+from model import SimpleMLP, CIFAR10Model
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
@@ -72,7 +72,7 @@ def main():
     transform = transforms.Compose(
         [
             transforms.ToTensor(),
-            transforms.Lambda(lambda x: torch.flatten(x)),
+            #transforms.Lambda(lambda x: torch.flatten(x)),
         ]
     )
 
@@ -89,7 +89,7 @@ def main():
     epochs = 100  # 100
     lr = 0.01
 
-    net = SimpleMLP(3072, 100, 10).to(device)
+    net = CIFAR10Model().to(device)
     criterion = nn.CrossEntropyLoss()
 
     accs = []
@@ -139,7 +139,7 @@ def main():
     plt.legend()
 
     # Show plot
-    plt.savefig("./results/sgd-results-cifar.png")
+    plt.savefig("./results/sgd-results-cifar-cnn.png")
 
 
 if __name__ == "__main__":
